@@ -279,6 +279,7 @@ export default {
       approval: "Persetujuan",
       input: "Input",
       analytics: "Analitik",
+      chat: "Chat",
     },
     export: {
       title: "LAPORAN PANEN",

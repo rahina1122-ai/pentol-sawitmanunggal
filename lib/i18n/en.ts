@@ -279,6 +279,7 @@ export default {
       approval: "Approval",
       input: "Input",
       analytics: "Analytics",
+      chat: "Chat",
     },
     export: {
       title: "HARVEST REPORT",

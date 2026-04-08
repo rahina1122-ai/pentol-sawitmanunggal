@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-native",
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./*"]
     }
@@ -15,6 +16,7 @@
     "nativewind-env.d.ts"
   ],
   "exclude": [
-    "scripts/**"
+    "scripts/**",
+    "node_modules/**"
   ]
 }

@@ -1,5 +1,5 @@
 import { Tabs, useRouter } from 'expo-router';
-import { Home, FileText, CheckSquare, BarChart3, Building2, MapPin, Settings, Shield } from 'lucide-react-native';
+import { Home, FileText, CheckSquare, BarChart3, Building2, MapPin, Settings, Shield, MessageCircle } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -15,26 +15,26 @@ export default function TabLayout() {
   };
 
   const getTabsForRole = () => {
+    const commonTabs = ['profile', 'chat'];
     switch (profile?.role) {
       case 'administrator':
-        // Administrator gets full access, including Admin tab
-        return ['admin', 'regional', 'estate', 'reports', 'analytics', 'approval', 'profile'];
+        return ['admin', 'regional', 'estate', 'reports', 'analytics', 'approval', ...commonTabs];
       case 'krani_panen':
-        return ['index', 'profile'];
+        return ['index', ...commonTabs];
       case 'krani_buah':
-        return ['krani-buah', 'profile'];
+        return ['krani-buah', ...commonTabs];
       case 'mandor':
-        return ['mandor', 'approval', 'reports', 'profile'];
+        return ['mandor', 'approval', 'reports', ...commonTabs];
       case 'asisten':
-        return ['asisten', 'monitoring', 'reports', 'profile'];
+        return ['asisten', 'monitoring', 'reports', ...commonTabs];
       case 'senior_asisten':
-        return ['asisten', 'reports', 'analytics', 'profile'];
+        return ['asisten', 'reports', 'analytics', ...commonTabs];
       case 'estate_manager':
-        return ['estate', 'reports', 'monitoring', 'profile'];
+        return ['estate', 'reports', 'monitoring', ...commonTabs];
       case 'regional_gm':
-        return ['regional', 'reports', 'analytics', 'profile'];
+        return ['regional', 'reports', 'analytics', ...commonTabs];
       default:
-        return ['index', 'profile'];
+        return ['index', ...commonTabs];
     }
   };
 
@@ -161,6 +161,15 @@ export default function TabLayout() {
           tabBarLabel: t('tabs.monitoring'),
           tabBarIcon: ({ size, color }) => <BarChart3 size={size} color={color} />,
           href: visibleTabs.includes('monitoring') ? '/(tabs)/monitoring' : null,
+        }}
+      />
+      <Tabs.Screen
+        name="chat"
+        options={{
+          title: t('tabs.chat') || 'Chat',
+          tabBarLabel: t('tabs.chat') || 'Chat',
+          tabBarIcon: ({ size, color }) => <MessageCircle size={size} color={color} />,
+          href: (visibleTabs.includes('chat') ? '/(tabs)/chat' : null) as any,
         }}
       />
       <Tabs.Screen

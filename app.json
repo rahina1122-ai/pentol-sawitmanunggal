@@ -18,10 +18,23 @@
     },
     "android": {
       "package": "com.sawitmanunggal.pentol",
+      "minSdkVersion": 24,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/lg-aep-cmyk-300dpi.jpg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +46,68 @@
       "expo-font",
       "expo-web-browser",
       "expo-sqlite",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24,
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0",
+            "kotlinVersion": "2.0.21",
+            "multiDexEnabled": true,
+            "enableShrinkResourcesInReleaseBuilds": false,
+            "enableProguardInReleaseBuilds": false,
+            "gradleProperties": {
+              "org.gradle.jvmargs": "-Xmx4096m -XX:MaxMetaspaceSize=512m",
+              "org.gradle.daemon": "false",
+              "org.gradle.parallel": "true"
+            },
+            "extraGradleArguments": [
+              "-Pandroid.enableDexingArtifactTransform.desugaring=false",
+              "-Pandroid.kotlin.suppressExpectActualClasses=true"
+            ],
+            "extraGradleProperties": {
+              "android.suppressUnsupportedCompileSdk": "35"
+            },
+            "packagingOptions": {
+              "pickFirst": [
+                "**/libc++_shared.so",
+                "**/libreactnative.so",
+                "**/libfbjni.so",
+                "**/libreact_native_modules.so",
+                "**/libhermes.so",
+                "**/libjscexecutor.so",
+                "**/libfolly_json.so",
+                "**/libfolly_runtime.so",
+                "**/libglog.so",
+                "**/libyoga.so",
+                "**/libcrypto.so",
+                "**/libssl.so",
+                "**/libtrae.so",
+                "**/libliteavsdk.so"
+              ],
+              "exclude": [
+                "META-INF/*.kotlin_module",
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0",
+                "**/libjsc.so"
+              ],
+              "doNotStrip": [
+                "**/libtrae.so",
+                "**/libliteavsdk.so"
+              ]
+            }
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
