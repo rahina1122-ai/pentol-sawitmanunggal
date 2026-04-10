@@ -485,36 +485,8 @@ export default function InputPanenScreen() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handlePickImage = async () => {
-    console.log('handlePickImage triggered');
-    
-    if (Platform.OS === 'web') {
-      // On Web, Alert.alert with custom buttons is not supported.
-      // We'll default to opening the library which on mobile web usually offers Camera option too.
-      // Or we could use window.confirm but it's limited.
-      // Let's just launch the library for now as it's the standard web behavior.
-      handleLaunchLibrary();
-      return;
-    }
-
-    Alert.alert(
-      t('input.button.uploadPhoto'),
-      t('input.label.pickSource'),
-      [
-        {
-          text: t('input.button.camera'),
-          onPress: handleTakeImage,
-        },
-        {
-          text: t('input.button.gallery'),
-          onPress: handleLaunchLibrary,
-        },
-        {
-          text: t('input.button.cancel'),
-          style: 'cancel',
-        },
-      ]
-    );
+  const handlePickImage = () => {
+    handleTakeImage();
   };
 
   const handleLaunchLibrary = async () => {
@@ -770,7 +742,7 @@ export default function InputPanenScreen() {
             searchable={gangList.length > 5}
           />
 
-          <Dropdown
+          <EditableDropdown
             label={t('input.label.block')}
             placeholder={t('input.placeholder.selectBlock')}
             value={formData.blok_name}
@@ -780,7 +752,7 @@ export default function InputPanenScreen() {
                 label: blok.name,
                 value: blok.name,
               }))}
-            onSelect={(value) => {
+            onChangeText={(value) => {
               updateField('blok_name', value);
               const selectedBlok = blokList.find(b => b.name === value);
               if (selectedBlok && selectedBlok.tahun_tanam) {
